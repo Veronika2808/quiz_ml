@@ -11,34 +11,33 @@ export class Quiz extends Component {
         userAnswer:null, //current users answer
         currentIndex:0,  //current questions index
         options: [],     //the four options
-        quizStart: false,
+        quizStart: false, //if switch to questions 
         quizEnd: false,  //determines if it's the last question
         score: 0,        //holds the score
-        disabled_answer: true ,  // determines the status of the buttons
-        disabled_next: true,
-        message:null,
-        message_show: false
+        disabled_answer: true ,  // button answer status
+        disabled_next: true, // button next status
+        message:null, // correct or incorrect answer
+        message_show: false //when to show message
       }
     }
     startHandler = () =>{
     this.setState({quizStart: true})}
 
-    restartHandler = () =>{
+    restartHandler = () =>{ // back to start page if pushed the button to start again
         this.setState({quizStart: false,
-            userAnswer:null, //current users answer
-        currentIndex:0,  //current questions index
-        options: [],     //the four options
+            userAnswer:null, 
+        currentIndex:0,  
+        options: [],   
         quizStart: false,
-        quizEnd: false,  //determines if it's the last question
-        score: 0,        //holds the score
-        disabled_answer: true ,  // determines the status of the buttons
+        quizEnd: false,  
+        score: 0,        
+        disabled_answer: true ,  
         disabled_next: true,
         message:null,
         message_show: false
         
         })}
 
-    //Component that holds the current quiz
     loadQuiz = () => {
     const {currentIndex} = this.state //get the current question index
     this.setState(() => {
@@ -52,7 +51,7 @@ export class Quiz extends Component {
         )
         }
 
-    answerClickHandler = () => {
+    answerClickHandler = () => { //after the user clicks the button answer
             const {userAnswer, answer, comment} = this.state
             if(userAnswer === answer) {
               this.setState({ message: `Верно!`})
@@ -60,9 +59,9 @@ export class Quiz extends Component {
             else {
               this.setState({ message: `Неверно:(`});
             }
-            this.setState({disabled_next: false, 
+            this.setState({disabled_next: false, // available next button
             disabled_answer: true, 
-        message_show: true})
+            message_show: true})
 
           }
 
@@ -89,7 +88,7 @@ export class Quiz extends Component {
     //Check the answer
     checkAnswer = answer => {
     this.setState({
-        userAnswer: answer,
+        userAnswer: answer, //when clicks one of the options 
         disabled_answer:false
     });
         }
@@ -114,7 +113,7 @@ export class Quiz extends Component {
 }
 
 
-finishHandler = () => {
+finishHandler = () => { //when reaches the last question 
     const { userAnswer, answer, score } = this.state
     if (userAnswer === answer) {
       this.setState({
@@ -154,7 +153,7 @@ render() {
                 <h2>{question}</h2>
                 <h3>{`Вопрос ${currentIndex + 1} of ${Questions.length}`}</h3>
                 
-                {options.map(option => (  //for each option, new paragraph
+                {options.map(option => (  //options
                     <p key={option.id} 
                     className={`button
                     // ${userAnswer === option ? "selected" : null}
@@ -164,19 +163,15 @@ render() {
 
                     >
                         {option}
-                    </p>))}
+                    </p>))}                             
 
-                {/* </div> */}
-                             
-
-
+                {/* first 9 questions */}
 
                 {currentIndex < Questions.length -1 &&
                 <button 
                 className="glow-on-hover"
                 disabled = {this.state.disabled_answer}
                 onClick = {this.answerClickHandler}
-                    // >Next Question</button>
                     >Answer</button> 
                 }
 
@@ -186,16 +181,15 @@ render() {
                 className="glow-on-hover"
                 disabled = {this.state.disabled_next}
                 onClick = {this.nextQuestionHandler}
-                    // >Next Question</button>
                     >Next</button> 
                 }
+                {/*the last question*/}
 
                 {currentIndex === Questions.length -1 &&
                     <button
                     className="glow-on-hover"
                     disabled = {this.state.disabled_answer}
                     onClick = {this.answerClickHandler}
-                    // >Next Question</button>
                     >Answer</button> 
                     }
 
