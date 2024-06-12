@@ -1,7 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+Данный репозиторий содержит в себе скрипт сайта с тестированием по машинному обучению. Тест содержит 10 вопросов, после ответа на которые пользователю станет доступен результат. 
 ## Available Scripts
 
 In the project directory, you can run:
